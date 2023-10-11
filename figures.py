@@ -246,8 +246,10 @@ class Triangle(Shape):
         if mt.producto_punto(self.normal,C)<0:
             return None
         
+        u,v,w = mt.barycentricCoords(self.vertex[0],self.vertex[1],self.vertex[2],P)
+        
         return Intercept(distance=t,
                          point=P,
                          normal=self.normal,
-                         texcoords=None,
+                         texcoords=(u,v),
                          obj=self)  

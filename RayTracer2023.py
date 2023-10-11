@@ -7,8 +7,8 @@ from lights import *
 from materials import *
 
 
-width = 256
-height = 256
+width = 960
+height = 540
 
 pygame.init()
 
@@ -38,11 +38,18 @@ diamond = Material(diffuse=(0.9,0.9,0.9),spec=128,Ks=0.2,ior=2.417,matType=TRANS
 realWater = Material(diffuse=(0.4,0.4,0.9),spec=128,Ks=0.2,ior=1.33,matType=TRANSPARENT)
 
 
-#raytracer.scene.append(Triangle(vertex=[(-1,2,-5),(1,2,-5),(0,0,-5)],material=brick))
-raytracer.scene.append(Triangle(vertex=[(-1,0,-5),(0,1,-5),(1,0,-5)],material=earth))
+#Triangulo
+raytracer.scene.append(Triangle(vertex=[(-2,1,-6),(0,3,-6.5),(1,0.7,-5)],material=mirror))
+raytracer.scene.append(Triangle(vertex=[(2.5,1,-6),(0,3,-6.5),(1,0.7,-5)],material=mirror))
+
+raytracer.scene.append(Triangle(vertex=[(-1.5,-0.5,-6),(0,0.5,-6),(0.5,-0.5,-5)],material=wall))
+raytracer.scene.append(Triangle(vertex=[(1.5,-0.5,-6),(0,0.5,-6),(0.5,-0.5,-5)],material=wall))
+
+raytracer.scene.append(Triangle(vertex=[(-1,-2,-6),(0,-1,-6),(0.1,-2,-5.5)],material=realWater))
+raytracer.scene.append(Triangle(vertex=[(1.1,-2,-6),(0,-1,-6),(0.1,-2,-5.5)],material=realWater))
 
 raytracer.lights.append(AmbientLight(intensity=1))
-#raytracer.lights.append(DirectionalLight(direction=(0,0,-1),intensity=0.9))
+raytracer.lights.append(DirectionalLight(direction=(0,0,-1),intensity=0.9))
 #raytracer.lights.append(PointLight(point=(1.5,0,-5),intensity=1,color=(1,0,1)))
 
 raytracer.rtClear()
@@ -61,6 +68,6 @@ while isRunning:
 
 rect = pygame.Rect(0,0,width,height)
 sub = screen.subsurface(rect)
-pygame.image.save(sub,"screenshot.jpg")
+pygame.image.save(sub,"screenshot.png")
 
 pygame.quit()
